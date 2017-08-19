@@ -12,9 +12,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TabHost;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private static final long DURATION_TIME = 2000L;
+    private long prevPressTime = 0L;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +48,26 @@ public class MainActivity extends AppCompatActivity
 
         setTitle("");
 
+        TabHost tabHost1 = (TabHost) findViewById(R.id.tabHost1) ;
+        tabHost1.setup() ;
 
+        // 첫 번째 Tab. (탭 표시 텍스트:"TAB 1"), (페이지 뷰:"content1")
+        TabHost.TabSpec ts1 = tabHost1.newTabSpec("Tab Spec 1");
+        ts1.setContent(R.id.content1);
+        ts1.setIndicator("TAB 1");
+        tabHost1.addTab(ts1) ;
 
+        // 두 번째 Tab. (탭 표시 텍스트:"TAB 2"), (페이지 뷰:"content2")
+        TabHost.TabSpec ts2 = tabHost1.newTabSpec("Tab Spec 2");
+        ts2.setContent(R.id.content2) ;
+        ts2.setIndicator("TAB 2");
+        tabHost1.addTab(ts2);
+
+        // 세 번째 Tab. (탭 표시 텍스트:"TAB 3"), (페이지 뷰:"content3")
+        TabHost.TabSpec ts3 = tabHost1.newTabSpec("Tab Spec 3");
+        ts3.setContent(R.id.content3) ;
+        ts3.setIndicator("TAB 3");
+        tabHost1.addTab(ts3);
     }
 
     public void onClick(View view)
@@ -60,6 +83,12 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+        }
+        if (System.currentTimeMillis() - prevPressTime <= DURATION_TIME) {
+            android.os.Process.killProcess(android.os.Process.myPid());
+        } else {
+            prevPressTime = System.currentTimeMillis();
+            Toast.makeText(this, "뒤로가기 버튼을 누르면 앱이 종료됩니다", Toast.LENGTH_SHORT);
         }
     }
 
