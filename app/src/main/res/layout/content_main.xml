@@ -20,19 +20,16 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <!-- TabWidget의 id값이 반드시 "tabs"로 지정되어야 함. -->
             <TabWidget
                 android:id="@android:id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <!-- FrameLayout의 id값이 반드시 "tabcontent"로 지정되어야 함. -->
             <FrameLayout
                 android:id="@android:id/tabcontent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <!-- 첫 번째 페이지. content1 -->
                 <LinearLayout
                     android:id="@+id/content1"
                     android:layout_width="match_parent"
@@ -45,11 +42,14 @@
                         android:background="#8BC34A"
                         android:gravity="center"
                         android:padding="8dp"
-                        android:text="TAB CONTENT 1" />
+                        android:text="최근 기록" />
 
+                    <ListView
+                        android:id="@+id/recentListView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
                 </LinearLayout>
 
-                <!-- 두 번째 페이지. content2 -->
                 <LinearLayout
                     android:id="@+id/content2"
                     android:layout_width="match_parent"
@@ -62,7 +62,7 @@
                         android:background="#009688"
                         android:gravity="center"
                         android:padding="8dp"
-                        android:text="TAB CONTENT 2" />
+                        android:text="즐겨 찾기" />
 
                 </LinearLayout>
                 <LinearLayout
@@ -76,9 +76,9 @@
                         android:background="#2196F3"
                         android:gravity="center"
                         android:padding="8dp"
-                        android:text="TAB CONTENT 3" />
-
+                        android:text="빠른 찾기" />
                 </LinearLayout>
+
             </FrameLayout>
         </LinearLayout>
     </TabHost>

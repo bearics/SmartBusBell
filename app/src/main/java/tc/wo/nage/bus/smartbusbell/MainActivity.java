@@ -12,6 +12,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.Toast;
 
@@ -48,12 +52,13 @@ public class MainActivity extends AppCompatActivity
 
         setTitle("");
 
+        // 탭 호스트 부분
         TabHost tabHost1 = (TabHost) findViewById(R.id.tabHost1) ;
         tabHost1.setup() ;
 
         // 첫 번째 Tab. (탭 표시 텍스트:"TAB 1"), (페이지 뷰:"content1")
         TabHost.TabSpec ts1 = tabHost1.newTabSpec("Tab Spec 1");
-        ts1.setContent(R.id.content1);
+        ts1.setContent(R.id.content2);
         ts1.setIndicator("TAB 1");
         tabHost1.addTab(ts1) ;
 
@@ -68,6 +73,27 @@ public class MainActivity extends AppCompatActivity
         ts3.setContent(R.id.content3) ;
         ts3.setIndicator("TAB 3");
         tabHost1.addTab(ts3);
+
+        // 최근 목록 리스트 뷰 아이템
+        BusInformation[] recentListViewItems = {
+                new BusInformation("120", "용산행"),
+                new BusInformation("283", "저승행"),
+                new BusInformation("370", "지옥행")};
+
+        ListAdapter adapter = new RecentListAdapter(this, recentListViewItems);
+        ListView recentListView = (ListView) findViewById(R.id.recentListView);
+        recentListView.setAdapter(adapter);
+
+        recentListView.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
+                        String busID = ((BusInformation) parent.getItemAtPosition(i)).getBusID();
+                        String busDestination = ((BusInformation) parent.getItemAtPosition(i)).getBusDestination();
+                        Toast.makeText(MainActivity.this, busID + " : " + busDestination, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
     }
 
     public void onClick(View view)
