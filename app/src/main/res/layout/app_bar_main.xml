@@ -20,14 +20,10 @@
             <SearchView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingRight="10dp"
+                android:paddingLeft="-15dp"
                 android:queryHint="버스 검색"
                 android:layout_alignParentRight="true">
-
             </SearchView>
-
-
-
 
         </android.support.v7.widget.Toolbar>
         <Button
