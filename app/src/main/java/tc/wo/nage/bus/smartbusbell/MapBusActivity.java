@@ -20,7 +20,7 @@ public class MapBusActivity extends FragmentActivity implements OnMapReadyCallba
 
     private GoogleMap mMap;
     private PolylineOptions polylineOptions;
-    private ArrayList<LatLng> arrayPoints;
+    private ArrayList<LatLng> arrayPoints = new ArrayList();
 
 
     @Override
@@ -59,18 +59,20 @@ public class MapBusActivity extends FragmentActivity implements OnMapReadyCallba
 
         mMap.addMarker(new MarkerOptions().position(SEOUL).title("서울입니다."));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SEOUL,16));
+
+        drawPolyline(p1);
+        drawPolyline(p2);
     }
 
-    public void drawPolyline(LatLng latLng1, LatLng latLng2) {
+
+    public void drawPolyline(LatLng latLng1) {
         polylineOptions = new PolylineOptions();
         polylineOptions.color(Color.RED);
         polylineOptions.width(5);
         arrayPoints.add(latLng1);
         polylineOptions.addAll(arrayPoints);
         mMap.addPolyline(polylineOptions);
-
-
     }
 
-
 }
+
